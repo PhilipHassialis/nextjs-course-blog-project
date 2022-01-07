@@ -1,39 +1,20 @@
 import React from "react";
 import AllPosts from "../../components/posts/all-posts";
+import { getAllPosts } from "../../lib/posts-util";
 
-const DUMMY_POSTS = [
-  {
-    slug: "getting-started",
-    title: "Getting started",
-    image: "gettingstarted.png",
-    excerpt: "NextJS is a React SSR framework",
-    date: "2022-02-10",
-  },
-  {
-    slug: "getting-started2",
-    title: "Getting started",
-    image: "gettingstarted.png",
-    excerpt: "NextJS is a React SSR framework",
-    date: "2022-02-10",
-  },
-  {
-    slug: "getting-started3",
-    title: "Getting started",
-    image: "gettingstarted.png",
-    excerpt: "NextJS is a React SSR framework",
-    date: "2022-02-10",
-  },
-  {
-    slug: "getting-started4",
-    title: "Getting started",
-    image: "gettingstarted.png",
-    excerpt: "NextJS is a React SSR framework",
-    date: "2022-02-10",
-  },
-];
+const AllPostsPage = (props) => {
+  const { posts } = props;
 
-const AllPostsPage = () => {
-  return <AllPosts posts={DUMMY_POSTS} />;
+  return <AllPosts posts={posts} />;
+};
+
+export const getServerSideProps = () => {
+  const allPosts = getAllPosts();
+  return {
+    props: {
+      posts: allPosts,
+    },
+  };
 };
 
 export default AllPostsPage;
